@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PeopleProDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PeopleProDBStoreContainer">
+    <EntitySet Name="Employees" EntityType="PeopleProDB.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Departments" EntityType="PeopleProDB.Store.Departments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Buildings" EntityType="PeopleProDB.Store.Buildings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EmployeesInDepartment" Association="PeopleProDB.Store.EmployeesInDepartment">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="BuildingEmployee" Association="PeopleProDB.Store.BuildingEmployee">
+      <End Role="Building" EntitySet="Buildings" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="0" />
+    <Property Name="DepartmentDepartmentID" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="BuildingBuildingID" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoB" Type="datetime" Nullable="false" />
+    <Property Name="RoomNumber" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Salary" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BuildingID" Type="int" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddressLine2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="EmployeesInDepartment">
+    <End Role="Department" Type="PeopleProDB.Store.Departments" Multiplicity="1" />
+    <End Role="Employee" Type="PeopleProDB.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuildingEmployee">
+    <End Role="Building" Type="PeopleProDB.Store.Buildings" Multiplicity="1" />
+    <End Role="Employee" Type="PeopleProDB.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="BuildingBuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
