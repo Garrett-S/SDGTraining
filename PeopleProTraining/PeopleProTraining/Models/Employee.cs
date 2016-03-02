@@ -30,8 +30,12 @@ namespace PeopleProTraining.Models
         [Required]
         public int BuildingBuildingID { get; set; }
         [Required]
+        [Display(Name = "First Name")]
+        [DataType(DataType.Text)]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Last Name")]
+        [DataType(DataType.Text)]
         public string LastName { get; set; }
         [Required]
         [Display(Name = "Date of Birth")]
@@ -39,6 +43,8 @@ namespace PeopleProTraining.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DoB { get; set; }
         [Required]
+        [Display(Name = "Room Number")]
+
         public int RoomNumber { get; set; }
         [Required]
         public string Title { get; set; }

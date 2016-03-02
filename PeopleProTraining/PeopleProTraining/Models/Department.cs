@@ -23,8 +23,11 @@ namespace PeopleProTraining.Models
         }
 
         [Required]
+        [Display(Name = "Department ID")]
         public int DepartmentID { get; set; }
         [Required]
+        [Display(Name = "Department Name")]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

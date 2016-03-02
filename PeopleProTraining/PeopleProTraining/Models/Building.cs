@@ -22,11 +22,18 @@ namespace PeopleProTraining.Models
         }
 
         [Required]
+        [Display(Name = "Building Name")]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
         [Required]
+        [Display(Name = "Building ID")]
         public int BuildingID { get; set; }
         [Required]
+        [Display(Name = "Address Line 1")]
+        [DataType(DataType.Text)]
         public string AddressLine1 { get; set; }
+         [Display(Name = "Address Line 2")]
+        [DataType(DataType.Text)]
         public string AddressLine2 { get; set; }
         [Required]
         public string City { get; set; }
