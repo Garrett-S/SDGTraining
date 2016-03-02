@@ -4,79 +4,79 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PeopleProDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="PeopleProDBStoreContainer">
-    <EntitySet Name="Employees" EntityType="PeopleProDB.Store.Employees" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Departments" EntityType="PeopleProDB.Store.Departments" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Buildings" EntityType="PeopleProDB.Store.Buildings" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="EmployeesInDepartment" Association="PeopleProDB.Store.EmployeesInDepartment">
-      <End Role="Department" EntitySet="Departments" />
-      <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-    <AssociationSet Name="BuildingEmployee" Association="PeopleProDB.Store.BuildingEmployee">
-      <End Role="Building" EntitySet="Buildings" />
-      <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Employees">
-    <Key>
-      <PropertyRef Name="EmployeeID" />
-    </Key>
-    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="0" />
-    <Property Name="DepartmentDepartmentID" Type="int" Nullable="false" DefaultValue="0" />
-    <Property Name="BuildingBuildingID" Type="int" Nullable="false" DefaultValue="0" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DoB" Type="datetime" Nullable="false" />
-    <Property Name="RoomNumber" Type="int" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Salary" Type="decimal" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Departments">
-    <Key>
-      <PropertyRef Name="DepartmentID" />
-    </Key>
-    <Property Name="DepartmentID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" DefaultValue="0" />
-  </EntityType>
-  <EntityType Name="Buildings">
-    <Key>
-      <PropertyRef Name="BuildingID" />
-    </Key>
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BuildingID" Type="int" Nullable="false" />
-    <Property Name="AddressLine1" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AddressLine2" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <Association Name="EmployeesInDepartment">
-    <End Role="Department" Type="PeopleProDB.Store.Departments" Multiplicity="1" />
-    <End Role="Employee" Type="PeopleProDB.Store.Employees" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Department">
-        <PropertyRef Name="DepartmentID" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="DepartmentDepartmentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="BuildingEmployee">
-    <End Role="Building" Type="PeopleProDB.Store.Buildings" Multiplicity="1" />
-    <End Role="Employee" Type="PeopleProDB.Store.Employees" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Building">
-        <PropertyRef Name="BuildingID" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="BuildingBuildingID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="PeopleProDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddressLine2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentDepartmentID" Type="int" Nullable="false" />
+          <Property Name="BuildingBuildingID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoB" Type="datetime" Nullable="false" />
+          <Property Name="RoomNumber" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BuildingEmployee">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="BuildingBuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeesInDepartment">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="DepartmentDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PeopleProDBStoreContainer">
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BuildingEmployee" Association="Self.FK_BuildingEmployee">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeesInDepartment" Association="Self.FK_EmployeesInDepartment">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PeopleProDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -100,12 +100,12 @@
           <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" DefaultValue="0" />
           <Property Name="DepartmentDepartmentID" Type="Int32" Nullable="false" DefaultValue="0" />
           <Property Name="BuildingBuildingID" Type="Int32" Nullable="false" DefaultValue="0" />
-          <Property Name="FirstName" Type="String" Nullable="false" />
-          <Property Name="LastName" Type="String" Nullable="false" />
-          <Property Name="DoB" Type="DateTime" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DoB" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RoomNumber" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" />
-          <Property Name="Salary" Type="Decimal" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Department" Relationship="PeopleProDB.EmployeesInDepartment" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Building" Relationship="PeopleProDB.BuildingEmployee" FromRole="Employee" ToRole="Building" />
         </EntityType>
@@ -114,21 +114,21 @@
             <PropertyRef Name="DepartmentID" />
           </Key>
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" DefaultValue="0" />
+          <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" DefaultValue="0" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Employees" Relationship="PeopleProDB.EmployeesInDepartment" FromRole="Department" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Building">
           <Key>
             <PropertyRef Name="BuildingID" />
           </Key>
-          <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="BuildingID" Type="Int32" Nullable="false" />
-          <Property Name="AddressLine1" Type="String" Nullable="false" />
-          <Property Name="AddressLine2" Type="String" Nullable="false" />
-          <Property Name="City" Type="String" Nullable="false" />
-          <Property Name="State" Type="String" Nullable="false" />
-          <Property Name="ZipCode" Type="String" Nullable="false" />
-          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AddressLine2" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Employees" Relationship="PeopleProDB.BuildingEmployee" FromRole="Building" ToRole="Employee" />
         </EntityType>
         <Association Name="EmployeesInDepartment">
@@ -214,6 +214,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

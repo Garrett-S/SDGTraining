@@ -1,0 +1,21 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Buildings] (Table)
+       [dbo].[Departments] (Table)
+       [dbo].[Employees] (Table)
+       [dbo].[Employees].[IX_FK_BuildingEmployee] (Index)
+       [dbo].[Employees].[IX_FK_EmployeesInDepartment] (Index)
+       [dbo].[FK_BuildingEmployee] (Foreign Key)
+       [dbo].[FK_EmployeesInDepartment] (Foreign Key)
+
+** Supporting actions

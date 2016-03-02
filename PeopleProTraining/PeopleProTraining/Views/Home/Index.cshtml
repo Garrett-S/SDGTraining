@@ -1,7 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "People Pro Training Home";
 }
 
-<h2>Index</h2>
+<h2>Welcome to People Pro Training</h2>
+<table class="table">
+    <th>View</th>
+    <tr>
+        <td>@Html.ActionLink("Buildings", "Index", "Buildings", new { area = "" }, null)</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Departments", "Index", "Departments", new { area = "" }, null)</td>
+    </tr>
+    <tr>
+        <td>@Html.ActionLink("Employees", "Index", "Employees", new { area = "" }, null)</td>
+    </tr>
+</table>
 
