@@ -40,6 +40,7 @@ namespace PeopleProTraining.Models
         [Required]
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
+        [CustomValidation(typeof(ValidationMethods), "ValidateDate")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DoB { get; set; }
         [Required]
@@ -53,5 +54,28 @@ namespace PeopleProTraining.Models
     
         public virtual Department Department { get; set; }
         public virtual Building Building { get; set; }
+    }
+
+    public class ValidationMethods
+    {
+        public static ValidationResult ValidateDate(DateTime date, ValidationContext context)
+        {
+            bool isValid = true;
+            DateTime minDate = new DateTime(1753, 1, 1);
+            if(date < minDate)
+            {
+                isValid = false;
+            }
+
+            if(isValid)
+            {
+                return ValidationResult.Success;
+            }
+            else
+            {
+                return new ValidationResult(
+                    string.Format("The date field must be greater than 1/1/1753."));
+            }
+        }
     }
 }
