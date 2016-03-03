@@ -40,9 +40,13 @@ namespace PeopleProTraining.Dal.Infrastructure
         }
         public Employee GetEmployee(int id)
         {
-            return GetEmployee(t => t.Id == id);
+            return GetEmployee(t => t.EmployeeID == id);
         }
 
+        public void SaveEmployee(Employee employee)
+        {
+            DoSave(p_context.Employees, employee, employee.EmployeeID, t => t.EmployeeID == employee.EmployeeID);
+        }
         #endregion
         #endregion
 
@@ -87,7 +91,7 @@ namespace PeopleProTraining.Dal.Infrastructure
         /// <param name="isDisposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031",
             Justification = "Swallows general exceptions, to prevent the service from being disabled.")]
-        private void Dispose(bool isDisposing)
+        public void Dispose(bool isDisposing)
         {
             if (!p_disposed)
             {

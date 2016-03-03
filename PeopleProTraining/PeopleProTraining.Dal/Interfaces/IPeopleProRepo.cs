@@ -17,8 +17,12 @@ namespace PeopleProTraining.Dal.Interfaces
 
         Employee GetEmployee(Func<Employee, bool> predicate);
         Employee GetEmployee(int id);
+        void SaveEmployee(Employee employee);
+
         #endregion
         #endregion
+
+        void Dispose(bool isDisposing);
 
     }
 }

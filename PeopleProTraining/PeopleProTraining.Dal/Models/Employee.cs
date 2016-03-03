@@ -13,7 +13,6 @@ namespace PeopleProTraining.Dal.Models
     }
     public class EmployeeMetaData
     {
-        public int Id;
 
         [Required]
         public string FirstName;

@@ -133,17 +133,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Models\PeopleProDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PeopleProDB.Context.cs</LastGenOutput>
-      <DependentUpon>PeopleProDB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\PeopleProDB.edmx.sql" />
-    <Content Include="Models\PeopleProDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PeopleProDB.cs</LastGenOutput>
-      <DependentUpon>PeopleProDB.edmx</DependentUpon>
-    </Content>
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -155,13 +144,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\PeopleProDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PeopleProDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PeopleProDB.edmx.diagram">
-      <DependentUpon>PeopleProDB.edmx</DependentUpon>
-    </Content>
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -191,30 +173,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Building.cs">
-      <DependentUpon>PeopleProDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Department.cs">
-      <DependentUpon>PeopleProDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>PeopleProDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PeopleProDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PeopleProDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PeopleProDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PeopleProDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PeopleProDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PeopleProDB.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +198,7 @@
     <Content Include="Views\Departments\Details.cshtml" />
     <Content Include="Views\Departments\Edit.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -249,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>

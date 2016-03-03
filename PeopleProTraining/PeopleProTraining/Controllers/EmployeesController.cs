@@ -6,29 +6,40 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PeopleProTraining.Models;
+using PeopleProTraining.Dal.Models;
+using PeopleProTraining.Dal.Interfaces;
+using PeopleProTraining.Dal.Infrastructure;
 
 namespace PeopleProTraining.Controllers
 {
     public class EmployeesController : Controller
     {
-        private PeopleProDBContainer db = new PeopleProDBContainer();
+
+        private IPeopleProRepo p_repo;
+
+
+        public EmployeesController() : this(new PeopleProRepo()) { }
+
+        public EmployeesController(IPeopleProRepo repo)
+        {
+            p_repo = repo;
+        }
 
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Department).Include(e => e.Building);
-            return View(employees.ToList());
+            var employees = p_repo.GetEmployees();
+            return View(employees);
         }
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = p_repo.GetEmployee(id.Value);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -53,8 +64,7 @@ namespace PeopleProTraining.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
-                db.SaveChanges();
+                p_repo.SaveEmployee(employee);
                 return RedirectToAction("Index");
             }
 
@@ -66,11 +76,11 @@ namespace PeopleProTraining.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = p_repo.GetEmployee(id.Value);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -89,8 +99,7 @@ namespace PeopleProTraining.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
+                p_repo.SaveEmployee(employee);
                 return RedirectToAction("Index");
             }
             ViewBag.DepartmentDepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", employee.DepartmentDepartmentID);
@@ -101,11 +110,11 @@ namespace PeopleProTraining.Controllers
         // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = p_repo.GetEmployee(id.Value);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -116,11 +125,18 @@ namespace PeopleProTraining.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = p_repo.GetEmployee(id.Value);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            throw new NotImplementedException();
             return RedirectToAction("Index");
         }
 
@@ -128,7 +144,7 @@ namespace PeopleProTraining.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                p_repo.Dispose(disposing);
             }
             base.Dispose(disposing);
         }

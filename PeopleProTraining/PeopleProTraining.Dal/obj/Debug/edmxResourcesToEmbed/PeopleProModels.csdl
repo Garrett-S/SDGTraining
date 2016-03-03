@@ -2,12 +2,79 @@
 <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PeopleProModels" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
   <EntityContainer Name="PeopleProModelsContainer" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Employees" EntityType="PeopleProModels.Employee" />
+    <EntitySet Name="Buildings" EntityType="PeopleProModels.Building" />
+    <EntitySet Name="Departments" EntityType="PeopleProModels.Department" />
+    <AssociationSet Name="FK_BuildingEmployee" Association="PeopleProModels.FK_BuildingEmployee">
+      <End Role="Building" EntitySet="Buildings" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeesInDepartment" Association="PeopleProModels.FK_EmployeesInDepartment">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="Id" />
+      <PropertyRef Name="EmployeeID" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" Nullable="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentDepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="BuildingBuildingID" Type="Int32" Nullable="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RoomNumber" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="Building" Relationship="PeopleProModels.FK_BuildingEmployee" FromRole="Employee" ToRole="Building" />
+    <NavigationProperty Name="Department" Relationship="PeopleProModels.FK_EmployeesInDepartment" FromRole="Employee" ToRole="Department" />
   </EntityType>
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="PeopleProModels.FK_BuildingEmployee" FromRole="Building" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="PeopleProModels.FK_EmployeesInDepartment" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <Association Name="FK_BuildingEmployee">
+    <End Type="PeopleProModels.Building" Role="Building" Multiplicity="1" />
+    <End Type="PeopleProModels.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="BuildingBuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeesInDepartment">
+    <End Type="PeopleProModels.Department" Role="Department" Multiplicity="1" />
+    <End Type="PeopleProModels.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

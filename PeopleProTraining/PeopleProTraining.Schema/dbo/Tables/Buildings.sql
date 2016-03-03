@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Buildings] (
     [Name]         NVARCHAR (MAX) NOT NULL,
-    [BuildingID]   INT            NOT NULL,
+    [BuildingID]   INT            NOT NULL IDENTITY,
     [AddressLine1] NVARCHAR (MAX) NOT NULL,
     [AddressLine2] NVARCHAR (MAX) NULL,
     [City]         NVARCHAR (MAX) NOT NULL,

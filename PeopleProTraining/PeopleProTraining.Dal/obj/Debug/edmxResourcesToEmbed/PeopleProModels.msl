@@ -5,7 +5,37 @@
       <EntityTypeMapping TypeName="IsTypeOf(PeopleProModels.Employee)">
         <MappingFragment StoreEntitySet="Employees">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="DepartmentDepartmentID" ColumnName="DepartmentDepartmentID" />
+          <ScalarProperty Name="BuildingBuildingID" ColumnName="BuildingBuildingID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buildings">
+      <EntityTypeMapping TypeName="IsTypeOf(PeopleProModels.Building)">
+        <MappingFragment StoreEntitySet="Buildings">
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="IsTypeOf(PeopleProModels.Department)">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
