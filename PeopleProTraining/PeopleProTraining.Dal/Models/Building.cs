@@ -18,7 +18,7 @@ namespace PeopleProTraining.Dal.Models
         [Required]
         public string Name;
 
-        public int BuildingID;
+        public int BuildingID = 0;
 
         public string AddressLine1;
 

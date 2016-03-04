@@ -7,3 +7,4 @@ C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.D
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Dal\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Dal\obj\Debug\PeopleProTraining.Dal.dll
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Dal\obj\Debug\PeopleProTraining.Dal.pdb
+C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Dal\obj\Debug\PeopleProTraining.Dal.csprojResolveAssemblyReference.cache

@@ -16,7 +16,7 @@ namespace PeopleProTraining.Dal.Models
 
         [Required]
         public string FirstName;
-        public int EmployeeID;
+        public int EmployeeID = 0;
         [Required]
         public int DepartmentDepartmentID;
         [Required]
