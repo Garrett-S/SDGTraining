@@ -126,7 +126,7 @@ namespace PeopleProTraining.Content
             {
                 return HttpNotFound();
             }
-            throw new NotImplementedException();
+            p_repo.RemoveDepartment(department);
             return RedirectToAction("Index");
         }
 

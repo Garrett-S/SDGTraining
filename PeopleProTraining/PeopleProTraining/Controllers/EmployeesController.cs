@@ -136,7 +136,7 @@ namespace PeopleProTraining.Controllers
             {
                 return HttpNotFound();
             }
-            throw new NotImplementedException();
+            p_repo.RemoveEmployee(employee);
             return RedirectToAction("Index");
         }
 

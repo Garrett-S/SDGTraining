@@ -127,7 +127,7 @@ namespace PeopleProTraining.Controllers
             {
                 return HttpNotFound();
             }
-            throw new NotImplementedException();
+            p_repo.RemoveBuilding(building);
             return RedirectToAction("Index");
         }
 

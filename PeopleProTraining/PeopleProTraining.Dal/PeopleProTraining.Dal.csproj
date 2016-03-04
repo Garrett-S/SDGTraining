@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\IPeopleProContext.cs" />
     <Compile Include="Interfaces\IPeopleProRepo.cs" />
     <Compile Include="Models\Building.cs" />
+    <Compile Include="Models\DBexceptions.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="PeopleProModels.Context.cs">

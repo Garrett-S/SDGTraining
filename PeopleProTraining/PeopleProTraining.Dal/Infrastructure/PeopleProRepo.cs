@@ -147,12 +147,7 @@ namespace PeopleProTraining.Dal.Infrastructure
             {
                 throw new ArgumentNullException(entity.GetType().Name);
             }
-
-            if (entityId <= 0)
-            {
-                dbSet.Remove(entity);
-            }
-
+            dbSet.Remove(entity);
             p_context.SaveChanges();
         }
 
