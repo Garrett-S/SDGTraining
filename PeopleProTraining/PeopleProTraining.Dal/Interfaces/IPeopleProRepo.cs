@@ -20,9 +20,26 @@ namespace PeopleProTraining.Dal.Interfaces
         void SaveEmployee(Employee employee);
 
         #endregion
+
+        #region buildings
+        IQueryable<Building> GetBuildings();
+        IEnumerable<Building> GetBuildings(Func<Building, bool> predicate);
+
+        Building GetBuilding(Func<Building, bool> predicate);
+        Building GetBuilding(int id);
+        void SaveBuilding(Building building);
+        #endregion
+
+        #region departments
+        IQueryable<Department> GetDepartments();
+        IEnumerable<Department> GetDepartments(Func<Department, bool> predicate);
+
+        Department GetDepartment(Func<Department, bool> predicate);
+        Department GetDepartment(int id);
+        void SaveDepartment(Department department);
         #endregion
 
         void Dispose(bool isDisposing);
-
+        #endregion
     }
 }

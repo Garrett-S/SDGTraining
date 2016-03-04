@@ -3,7 +3,3 @@ C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.S
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\bin\Debug\PeopleProTraining.Schema.pdb
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\PeopleProTraining.Schema.dll
 C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\PeopleProTraining.Schema.pdb
-C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\Model.xml
-C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\refactor.xml
-C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\postdeploy.sql
-C:\Users\smithgar\Source\Repos\SDGTraining\PeopleProTraining\PeopleProTraining.Schema\obj\Debug\predeploy.sql

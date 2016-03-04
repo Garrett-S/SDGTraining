@@ -16,6 +16,21 @@ namespace PeopleProTraining.Dal.Models
 
         [Required]
         public string FirstName;
+        public int EmployeeID;
+        [Required]
+        public int DepartmentDepartmentID;
+        [Required]
+        public int BuildingBuildingID;
+        [Required]
+        public string LastName;
+        [Required]
+        public System.DateTime DoB;
+        [Required]
+        public int RoomNumber;
+        [Required]
+        public string Title;
+        [Required]
+        public decimal Salary;
 
     }
 

@@ -48,6 +48,57 @@ namespace PeopleProTraining.Dal.Infrastructure
             DoSave(p_context.Employees, employee, employee.EmployeeID, t => t.EmployeeID == employee.EmployeeID);
         }
         #endregion
+
+        #region buildings
+        public IQueryable<Building> GetBuildings()
+        {
+            return p_context.Buildings;
+        }
+        public IEnumerable<Building> GetBuildings(Func<Building, bool> predicate)
+        {
+            return p_context.Buildings.Where(predicate);
+        }
+
+        public Building GetBuilding(Func<Building, bool> predicate)
+        {
+            return GetBuildings().SingleOrDefault(predicate);
+        }
+        public Building GetBuilding(int id)
+        {
+            return GetBuilding(t => t.BuildingID == id);
+        }
+
+        public void SaveBuilding(Building building)
+        {
+            DoSave(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
+        }
+        #endregion
+
+        #region departments
+        public IQueryable<Department> GetDepartments()
+        {
+            return p_context.Departments;
+        }
+        public IEnumerable<Department> GetDepartments(Func<Department, bool> predicate)
+        {
+            return p_context.Departments.Where(predicate);
+        }
+
+        public Department GetDepartment(Func<Department, bool> predicate)
+        {
+            return GetDepartments().SingleOrDefault(predicate);
+        }
+        public Department GetDepartment(int id)
+        {
+            return GetDepartment(t => t.DepartmentID == id);
+        }
+
+        public void SaveDepartment(Department department)
+        {
+            DoSave(p_context.Departments, department, department.DepartmentID, t => t.DepartmentID == department.DepartmentID);
+        }
+        #endregion
+
         #endregion
 
 

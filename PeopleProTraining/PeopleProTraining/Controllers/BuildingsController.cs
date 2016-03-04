@@ -6,28 +6,39 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PeopleProTraining.Models;
+using PeopleProTraining.Dal.Models;
+using PeopleProTraining.Dal.Interfaces;
+using PeopleProTraining.Dal.Infrastructure;
 
 namespace PeopleProTraining.Controllers
 {
     public class BuildingsController : Controller
     {
-        private PeopleProDBContainer db = new PeopleProDBContainer();
+        private IPeopleProRepo p_repo;
+
+
+        public BuildingsController() : this(new PeopleProRepo()) { }
+
+        public BuildingsController(IPeopleProRepo repo)
+        {
+            p_repo = repo;
+        }
 
         // GET: Buildings
         public ActionResult Index()
         {
-            return View(db.Buildings.ToList());
+            var buildings = p_repo.GetBuildings();
+            return View(buildings);
         }
 
         // GET: Buildings/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Building building = db.Buildings.Find(id);
+            Building building = p_repo.GetBuilding(id.Value);
             if (building == null)
             {
                 return HttpNotFound();
@@ -50,8 +61,7 @@ namespace PeopleProTraining.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Buildings.Add(building);
-                db.SaveChanges();
+                p_repo.SaveBuilding(building);
                 return RedirectToAction("Index");
             }
 
@@ -61,11 +71,11 @@ namespace PeopleProTraining.Controllers
         // GET: Buildings/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Building building = db.Buildings.Find(id);
+            Building building = p_repo.GetBuilding(id.Value);
             if (building == null)
             {
                 return HttpNotFound();
@@ -82,8 +92,7 @@ namespace PeopleProTraining.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(building).State = EntityState.Modified;
-                db.SaveChanges();
+                p_repo.SaveBuilding(building);
                 return RedirectToAction("Index");
             }
             return View(building);
@@ -92,11 +101,11 @@ namespace PeopleProTraining.Controllers
         // GET: Buildings/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Building building = db.Buildings.Find(id);
+            Building building = p_repo.GetBuilding(id.Value);
             if (building == null)
             {
                 return HttpNotFound();
@@ -107,11 +116,18 @@ namespace PeopleProTraining.Controllers
         // POST: Buildings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Building building = db.Buildings.Find(id);
-            db.Buildings.Remove(building);
-            db.SaveChanges();
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Building building = p_repo.GetBuilding(id.Value);
+            if (building == null)
+            {
+                return HttpNotFound();
+            }
+            throw new NotImplementedException();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +135,7 @@ namespace PeopleProTraining.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                p_repo.Dispose(disposing);
             }
             base.Dispose(disposing);
         }

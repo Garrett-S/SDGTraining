@@ -50,8 +50,8 @@ namespace PeopleProTraining.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.DepartmentDepartmentID = new SelectList(db.Departments, "DepartmentID", "Name");
-            ViewBag.BuildingBuildingID = new SelectList(db.Buildings, "BuildingID", "Name");
+            ViewBag.DepartmentDepartmentID = new SelectList(p_repo.GetDepartments(), "DepartmentID", "Name");
+            ViewBag.BuildingBuildingID = new SelectList(p_repo.GetBuildings(), "BuildingID", "Name");
             return View();
         }
 
@@ -68,8 +68,8 @@ namespace PeopleProTraining.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartmentDepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", employee.DepartmentDepartmentID);
-            ViewBag.BuildingBuildingID = new SelectList(db.Buildings, "BuildingID", "Name", employee.BuildingBuildingID);
+            ViewBag.DepartmentDepartmentID = new SelectList(p_repo.GetDepartments(), "DepartmentID", "Name", employee.DepartmentDepartmentID);
+            ViewBag.BuildingBuildingID = new SelectList(p_repo.GetBuildings(), "BuildingID", "Name", employee.BuildingBuildingID);
             return View(employee);
         }
 
@@ -85,8 +85,8 @@ namespace PeopleProTraining.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartmentDepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", employee.DepartmentDepartmentID);
-            ViewBag.BuildingBuildingID = new SelectList(db.Buildings, "BuildingID", "Name", employee.BuildingBuildingID);
+            ViewBag.DepartmentDepartmentID = new SelectList(p_repo.GetDepartments(), "DepartmentID", "Name", employee.DepartmentDepartmentID);
+            ViewBag.BuildingBuildingID = new SelectList(p_repo.GetBuildings(), "BuildingID", "Name", employee.BuildingBuildingID);
             return View(employee);
         }
 
@@ -102,8 +102,8 @@ namespace PeopleProTraining.Controllers
                 p_repo.SaveEmployee(employee);
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartmentDepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", employee.DepartmentDepartmentID);
-            ViewBag.BuildingBuildingID = new SelectList(db.Buildings, "BuildingID", "Name", employee.BuildingBuildingID);
+            ViewBag.DepartmentDepartmentID = new SelectList(p_repo.GetDepartments(), "DepartmentID", "Name", employee.DepartmentDepartmentID);
+            ViewBag.BuildingBuildingID = new SelectList(p_repo.GetBuildings(), "BuildingID", "Name", employee.BuildingBuildingID);
             return View(employee);
         }
 

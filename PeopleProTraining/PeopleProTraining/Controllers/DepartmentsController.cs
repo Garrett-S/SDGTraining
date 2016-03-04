@@ -6,28 +6,38 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PeopleProTraining.Models;
+using PeopleProTraining.Dal.Models;
+using PeopleProTraining.Dal.Interfaces;
+using PeopleProTraining.Dal.Infrastructure;
 
 namespace PeopleProTraining.Content
 {
     public class DepartmentsController : Controller
     {
-        private PeopleProDBContainer db = new PeopleProDBContainer();
+        private IPeopleProRepo p_repo;
+
+        public DepartmentsController() : this(new PeopleProRepo()) { }
+
+        public DepartmentsController(IPeopleProRepo repo)
+        {
+            p_repo = repo;
+        }
 
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            var departments = p_repo.GetDepartments();
+            return View(departments);
         }
 
         // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = p_repo.GetDepartment(id.Value);
             if (department == null)
             {
                 return HttpNotFound();
@@ -50,8 +60,7 @@ namespace PeopleProTraining.Content
         {
             if (ModelState.IsValid)
             {
-                db.Departments.Add(department);
-                db.SaveChanges();
+                p_repo.SaveDepartment(department);
                 return RedirectToAction("Index");
             }
 
@@ -61,11 +70,11 @@ namespace PeopleProTraining.Content
         // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = p_repo.GetDepartment(id.Value);
             if (department == null)
             {
                 return HttpNotFound();
@@ -82,8 +91,7 @@ namespace PeopleProTraining.Content
         {
             if (ModelState.IsValid)
             {
-                db.Entry(department).State = EntityState.Modified;
-                db.SaveChanges();
+                p_repo.SaveDepartment(department);
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -92,11 +100,11 @@ namespace PeopleProTraining.Content
         // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = p_repo.GetDepartment(id.Value);
             if (department == null)
             {
                 return HttpNotFound();
@@ -107,11 +115,18 @@ namespace PeopleProTraining.Content
         // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Department department = db.Departments.Find(id);
-            db.Departments.Remove(department);
-            db.SaveChanges();
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = p_repo.GetDepartment(id.Value);
+            if(department == null)
+            {
+                return HttpNotFound();
+            }
+            throw new NotImplementedException();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +134,7 @@ namespace PeopleProTraining.Content
         {
             if (disposing)
             {
-                db.Dispose();
+                p_repo.Dispose(disposing);
             }
             base.Dispose(disposing);
         }
