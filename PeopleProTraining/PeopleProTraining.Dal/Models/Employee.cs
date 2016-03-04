@@ -24,6 +24,7 @@ namespace PeopleProTraining.Dal.Models
         [Required]
         public string LastName;
         [Required]
+        [DataType(DataType.Date)]
         public System.DateTime DoB;
         [Required]
         public int RoomNumber;

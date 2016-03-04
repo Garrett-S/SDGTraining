@@ -47,6 +47,10 @@ namespace PeopleProTraining.Dal.Infrastructure
         {
             DoSave(p_context.Employees, employee, employee.EmployeeID, t => t.EmployeeID == employee.EmployeeID);
         }
+        public void RemoveEmployee(Employee employee)
+        {
+            DoRemove(p_context.Employees, employee, employee.EmployeeID, t => t.EmployeeID == employee.EmployeeID);
+        }
         #endregion
 
         #region buildings
@@ -71,6 +75,10 @@ namespace PeopleProTraining.Dal.Infrastructure
         public void SaveBuilding(Building building)
         {
             DoSave(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
+        }
+        public void RemoveBuilding(Building building)
+        {
+            DoRemove(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
         }
         #endregion
 
@@ -97,6 +105,11 @@ namespace PeopleProTraining.Dal.Infrastructure
         {
             DoSave(p_context.Departments, department, department.DepartmentID, t => t.DepartmentID == department.DepartmentID);
         }
+
+        public void RemoveDepartment(Department department)
+        {
+            DoRemove(p_context.Departments, department, department.DepartmentID, t => t.DepartmentID == department.DepartmentID);
+        }
         #endregion
 
         #endregion
@@ -121,6 +134,23 @@ namespace PeopleProTraining.Dal.Infrastructure
             {
                 var old = dbSet.SingleOrDefault(predicate);
                 entity.CopyTo(old);
+            }
+
+            p_context.SaveChanges();
+        }
+        /// <summary>
+        /// Abstracts the deletion process for an item in the Db Context.
+        /// </summary>
+        private void DoRemove<T>(IDbSet<T> dbSet, T entity, int entityId, Func<T, bool> predicate) where T : class
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(entity.GetType().Name);
+            }
+
+            if (entityId <= 0)
+            {
+                dbSet.Remove(entity);
             }
 
             p_context.SaveChanges();
