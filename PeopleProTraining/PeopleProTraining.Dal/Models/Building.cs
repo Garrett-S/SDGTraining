@@ -10,7 +10,10 @@ namespace PeopleProTraining.Dal.Models
     [MetadataType(typeof(BuildingMetaData))]
     public partial class Building
     {
-
+        public bool HasEmployees { get {
+                return (
+                (this.Employees.Count != 0)
+                ); } }
     }
     public class BuildingMetaData
     {

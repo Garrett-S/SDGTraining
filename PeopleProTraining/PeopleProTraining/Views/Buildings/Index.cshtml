@@ -61,7 +61,10 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.BuildingID }) |
             @Html.ActionLink("Details", "Details", new { id=item.BuildingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BuildingID })
+            @if (!(item.HasEmployees))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.BuildingID })
+            }
         </td>
     </tr>
 }

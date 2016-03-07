@@ -10,6 +10,9 @@ namespace PeopleProTraining.Dal.Models
     [MetadataType(typeof(DepartmentMetaData))]
     public partial class Department
     {
+        public bool HasEmployees { get { return (
+                    (this.Employees.Count != 0)
+                    ); } }
     }
 
     public class DepartmentMetaData
