@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PeopleProTraining.Dal.Models;
 using PeopleProTraining.Dal.Interfaces;
 using PeopleProTraining.Dal.Infrastructure;
+using PeopleProTraining.Dal.CustomExceptions;
 
 namespace PeopleProTraining.Content
 {
@@ -126,7 +127,15 @@ namespace PeopleProTraining.Content
             {
                 return HttpNotFound();
             }
-            p_repo.RemoveDepartment(department);
+            try
+            {
+                p_repo.RemoveDepartment(department);
+            }
+            catch (DBRemoveException e)
+            {
+                return RedirectToAction("Error");
+            }
+
             return RedirectToAction("Index");
         }
 

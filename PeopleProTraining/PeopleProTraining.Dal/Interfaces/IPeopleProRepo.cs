@@ -27,6 +27,7 @@ namespace PeopleProTraining.Dal.Interfaces
 
         Building GetBuilding(Func<Building, bool> predicate);
         Building GetBuilding(int id);
+        IEnumerable<Employee> BuildingEmployees(int id);
         void SaveBuilding(Building building);
         void RemoveBuilding(Building building);
         #endregion
@@ -37,6 +38,7 @@ namespace PeopleProTraining.Dal.Interfaces
 
         Department GetDepartment(Func<Department, bool> predicate);
         Department GetDepartment(int id);
+        IEnumerable<Employee> DepartmentEmployees(int id);
         void SaveDepartment(Department department);
         void RemoveDepartment(Department department);
         #endregion

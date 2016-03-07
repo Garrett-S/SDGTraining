@@ -127,7 +127,13 @@ namespace PeopleProTraining.Controllers
             {
                 return HttpNotFound();
             }
-            p_repo.RemoveBuilding(building);
+            try {
+                p_repo.RemoveBuilding(building);
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("Error");
+            }
             return RedirectToAction("Index");
         }
 

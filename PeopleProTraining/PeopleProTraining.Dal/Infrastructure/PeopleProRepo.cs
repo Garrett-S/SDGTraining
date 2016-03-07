@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using PeopleProTraining.Dal.Extensions;
 using PeopleProTraining.Dal.Interfaces;
 using PeopleProTraining.Dal.Models;
+using System.Data.SqlClient;
+using PeopleProTraining.Dal.CustomExceptions;
 
 namespace PeopleProTraining.Dal.Infrastructure
 {
@@ -72,13 +74,29 @@ namespace PeopleProTraining.Dal.Infrastructure
             return GetBuilding(t => t.BuildingID == id);
         }
 
+        public IEnumerable<Employee> BuildingEmployees(int id)
+        {
+            var employees = GetEmployees();
+            employees = from employee in employees
+                        where employee.BuildingBuildingID == id
+                        select employee;
+
+            return employees;
+        }
+
         public void SaveBuilding(Building building)
         {
             DoSave(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
         }
         public void RemoveBuilding(Building building)
         {
-            DoRemove(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
+            try {
+                DoRemove(p_context.Buildings, building, building.BuildingID, t => t.BuildingID == building.BuildingID);
+            }
+            catch (Exception removeException)
+            {
+                throw new DBRemoveException(removeException.ToString());
+            }
         }
         #endregion
 
@@ -100,6 +118,15 @@ namespace PeopleProTraining.Dal.Infrastructure
         {
             return GetDepartment(t => t.DepartmentID == id);
         }
+        public IEnumerable<Employee> DepartmentEmployees(int id)
+        {
+            var employees = GetEmployees();
+            employees = from employee in employees
+                        where employee.DepartmentDepartmentID == id
+                        select employee;
+
+            return employees;
+        }
 
         public void SaveDepartment(Department department)
         {
@@ -108,7 +135,14 @@ namespace PeopleProTraining.Dal.Infrastructure
 
         public void RemoveDepartment(Department department)
         {
-            DoRemove(p_context.Departments, department, department.DepartmentID, t => t.DepartmentID == department.DepartmentID);
+            try
+            {
+                DoRemove(p_context.Departments, department, department.DepartmentID, t => t.DepartmentID == department.DepartmentID);
+            }
+            catch (Exception removeException)
+            {
+                throw new DBRemoveException(removeException.ToString());
+            }
         }
         #endregion
 

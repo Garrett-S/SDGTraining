@@ -54,6 +54,7 @@
     <Compile Include="Building.cs">
       <DependentUpon>PeopleProModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomExceptions\DBRemoveException.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>PeopleProModels.tt</DependentUpon>
     </Compile>
@@ -69,7 +70,6 @@
     <Compile Include="Interfaces\IPeopleProContext.cs" />
     <Compile Include="Interfaces\IPeopleProRepo.cs" />
     <Compile Include="Models\Building.cs" />
-    <Compile Include="Models\DBexceptions.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="PeopleProModels.Context.cs">
