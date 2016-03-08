@@ -131,9 +131,9 @@ namespace PeopleProTraining.Content
             {
                 p_repo.RemoveDepartment(department);
             }
-            catch (DBRemoveException e)
+            catch (Exception)
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Error", new { area = "" });
             }
 
             return RedirectToAction("Index");

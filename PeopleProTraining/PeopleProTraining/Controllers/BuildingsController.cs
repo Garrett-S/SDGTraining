@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PeopleProTraining.Dal.Models;
 using PeopleProTraining.Dal.Interfaces;
 using PeopleProTraining.Dal.Infrastructure;
+using PeopleProTraining.Dal.CustomExceptions;
 
 namespace PeopleProTraining.Controllers
 {
@@ -130,9 +131,9 @@ namespace PeopleProTraining.Controllers
             try {
                 p_repo.RemoveBuilding(building);
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Error", new { area = "" });
             }
             return RedirectToAction("Index");
         }
