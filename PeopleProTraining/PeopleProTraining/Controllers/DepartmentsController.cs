@@ -68,6 +68,18 @@ namespace PeopleProTraining.Content
             return View(department);
         }
 
+        [HttpPost]
+        public ActionResult AjaxCreate(Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                p_repo.SaveDepartment(department);
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false });
+        }
+
         // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {

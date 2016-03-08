@@ -5,6 +5,9 @@
     ViewBag.Title = "Department Index";
 }
 
+<head>
+    <script src="/scripts/jquery-1.10.2.min.js"></script>
+</head>
 <h2>Index</h2>
 
 <p>
@@ -35,3 +38,37 @@
 }
 
 </table>
+<h4> Ajax add a Department</h4>
+<form id="NewDepartment" method="post">
+    Name: <input type="text" name="departmentName" id="departmentName" />
+    <input type="submit" name="Add" />
+</form>
+<p></p>
+
+
+<script type="text/javascript">
+    $('input[name="Add"]').click(function () {
+        var depName = $("#departmentName").val();
+        addDepartment(depName);
+    })
+
+    function addDepartment(departmentName) {
+        var depValues = 
+        {
+            "Name": String(departmentName), "DepartmentID": 0
+        }
+        $.ajax({
+            url: '/Departments/AjaxCreate',
+            type: 'POST',
+            data: JSON.stringify(depValues),
+            contentType: 'application/json',
+            success: function (data) {
+                alert(data.success);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+</script>
